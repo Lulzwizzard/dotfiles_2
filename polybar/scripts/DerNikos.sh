@@ -1,0 +1,1 @@
+echo "Der Nikos"
