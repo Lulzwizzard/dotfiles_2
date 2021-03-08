@@ -1,11 +1,14 @@
 # dotfiles
 This contains a few config files, for the way I like to use my Linux.
 
-# currently included
-## Shells
+## currently included
+### Shells
 - bash
 - fish
 - zsh
-## Window Management Stuff
+### Window Management Stuff
 - polybar
 - xmonad
+## planned to include
+- vim
+- emacs
