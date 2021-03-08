@@ -10,5 +10,5 @@ This contains a few config files, for the way I like to use my Linux.
 - polybar
 - xmonad
 ## planned to include
-- vim
 - emacs
+- vim
