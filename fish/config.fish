@@ -8,6 +8,7 @@
 echo 'Hi, ich bin der Nikos' | lolcat
 #pfetch | lolcat
 set -g -x fish_greeting ''
+starship init fish | source
 
 ### EXPORT ###
 set -U fish_user_paths $HOME/.local/bin $HOME/Applications $fish_user_paths
@@ -184,6 +185,7 @@ alias .3='cd ../../..'
 alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
 alias home="cd ~"
+alias root="cd /"
 
 # replacing programs with other programs
 alias vi='vim'
@@ -200,7 +202,9 @@ alias lt='exa -aT --color=always --group-directories-first' # tree listing
 
 # pacman and yay
 alias pacs='sudo pacman -S'                      # install new program from Repos
+alias pacrm='sudo pacman -R'                     # remove program from Repos
 alias yays='yay -S'                              # install new program from AUR
+alias yayrm='yay -R'                             # remove program from AUR
 alias pacsyu='sudo pacman -Syyu'                 # update only standard pkgs
 alias yaysua='yay -Sua --noconfirm'              # update only AUR pkgs
 alias yaysyu='yay -Syu --noconfirm'              # update standard pkgs and AUR pkgs
