@@ -33,9 +33,13 @@ import XMonad.Actions.CycleWS
 
 -- Default Applications
 myBrowser :: String
+myBrowser = "brave"
 
-myTerminal      = "termite -e fish"
-myBrowser       = "brave"
+myTerminal :: String
+myTerminal = "termite"
+
+myFileManager :: String
+myFileManager = "spacefm"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -96,7 +100,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- ###BASICS
     -- ##basic functionality
-    [ ((modm, xK_t), spawn $ myTerminal)
+    [ ((modm, xK_t), spawn $ (myTerminal ++ " -e fish"))
     , ((modm,               xK_r     ), spawn "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'")
     , ((modm .|. shiftMask, xK_q     ), spawn "arcolinux-logout")
     , ((modm .|. controlMask, xK_q     ), spawn "xmonad --recompile; xmonad --restart")
@@ -150,10 +154,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,                 xK_u     ), spawn "thunderbird")
     
     -- launch files within gui
-    , ((modm,                 xK_f     ), spawn "spacefm")
+    , ((modm,                 xK_f     ), spawn myFileManager)
 
     -- launch files within cli
-    , ((modm .|. controlMask, xK_f     ), spawn "termite -e vifm")
+    , ((modm .|. controlMask, xK_f     ), spawn (myTerminal ++ " -e vifm"))
     
     -- launch spotify
     , ((modm,                 xK_m     ), spawn "spotify")
@@ -174,7 +178,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm                , xK_a     ), spawn "emacs")
 
     -- launch vim
-    , ((modm .|. controlMask, xK_a     ), spawn "termite -e vim")
+    , ((modm .|. controlMask, xK_a     ), spawn (myTerminal ++ " -e vim"))
 
     -- launch telegram
     , ((modm,                 xK_e     ), spawn "telegram-desktop")
@@ -183,7 +187,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. controlMask, xK_t     ), spawn "xfce4-taskmanager")
 
     -- launch WhatsApp
-    , ((modm                , xK_w     ), spawn "brave --profile-directory=Default --app-id=hnpfjngllnobngcgfapefoaidbinmjnm")
+    , ((modm                , xK_w     ), spawn (myBrowser ++ " --profile-directory=Default --app-id=hnpfjngllnobngcgfapefoaidbinmjnm"))
 
     -- launch LibreOffice
     , ((modm                , xK_o     ), spawn "libreoffice")
@@ -204,10 +208,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm                , xK_d    ), spawn "simple-scan")
 
     -- launch GenkiArcade
-    , ((modm .|. controlMask, xK_e    ), spawn "brave --profile-directory=Default --app-id=apmgkabhjdajndnmdcbiiaadmfmomlki")
+    , ((modm .|. controlMask, xK_e    ), spawn (myBrowser ++ " --profile-directory=Default --app-id=apmgkabhjdajndnmdcbiiaadmfmomlki"))
 
     -- launch Pocket
-    , ((modm                , xK_p    ), spawn "brave --profile-directory=Default --app-id=kfpojikjhmgaokldhmplmgmcoomikeek")
+    , ((modm                , xK_p    ), spawn (myBrowser ++ " --profile-directory=Default --app-id=kfpojikjhmgaokldhmplmgmcoomikeek"))
 
     -- launch Calculator
     , ((modm                , xK_c    ), spawn "galculator")
@@ -216,23 +220,24 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. controlMask, xK_m     ), spawn "pavucontrol")
     
     -- launch wifimanager
-    , ((modm .|. controlMask, xK_w     ), spawn "termite -e network-manager.nmtui-connect")
+    , ((modm .|. controlMask, xK_w     ), spawn (myTerminal ++ "-e network-manager.nmtui-connect"))
     
     -- launch blueberry
     , ((modm .|. controlMask, xK_b     ), spawn "blueberry")
 
     -- launch ToDo
-    , ((modm .|. controlMask, xK_d     ), spawn "brave --profile-directory=Default --app-id=jlhoajbaojeilbdnlldgecmilgppanbh")
+    , ((modm .|. controlMask, xK_d     ), spawn (myBrowser ++ " --profile-directory=Default --app-id=jlhoajbaojeilbdnlldgecmilgppanbh"))
 
     -- launch vlc
     , ((modm,                 xK_v     ), spawn "vlc")
 
     -- make a screenshot
-    , ((0,                  xK_Print), spawn "org.flameshot.Flameshot gui")
-    , ((shiftMask,          xK_Print), spawn "org.flameshot.Flameshot full -c -p ~/Bilder/Screenshots")
+    , ((0,                  xK_Print), spawn "flameshot gui")
+    , ((shiftMask,          xK_Print), spawn "flameshot full -c -p ~/Bilder/Screenshots")
     
     -- ###JOIN Online Meetings
-    --Travel:
+
+    -- ###Travel:
     -- Wifi on ICE
     , ((modm .|. altMask, xK_i    ), spawn "brave http://wifionice.de/de/")
     ]
@@ -323,11 +328,11 @@ myStartupHook = do
   spawnOnce "dunst"
   spawnOnce "albert"
   spawnOnce "nextcloud"
-  spawnOnce "com.dropbox.Client"
+  spawnOnce "dropbox"
   spawnOnce "exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
   spawnOnce "copyq"
   spawnOnce "exec ~/.xmonad/scripts/disable_screenoff.sh"
-  spawnOnce "org.flameshot.Flameshot"
+  spawnOnce "flameshot"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
