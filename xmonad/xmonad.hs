@@ -101,6 +101,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- ###BASICS
     -- ##basic functionality
     [ ((modm, xK_t), spawn $ (myTerminal ++ " -e fish"))
+    , ((modm .|. altMask, xK_t), spawn myTerminal)
+    , ((modm .|. shiftMask, xK_t), spawn (myTerminal ++ " -e zsh"))
     , ((modm,               xK_r     ), spawn "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'")
     , ((modm .|. shiftMask, xK_q     ), spawn "arcolinux-logout")
     , ((modm .|. controlMask, xK_q     ), spawn "xmonad --recompile; xmonad --restart")
@@ -212,9 +214,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch Pocket
     , ((modm                , xK_p    ), spawn (myBrowser ++ " --profile-directory=Default --app-id=kfpojikjhmgaokldhmplmgmcoomikeek"))
-
-    -- launch Calculator
-    , ((modm                , xK_c    ), spawn "galculator")
     
     -- launch PulseAudioControl
     , ((modm .|. controlMask, xK_m     ), spawn "pavucontrol")
@@ -239,7 +238,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- ###Travel:
     -- Wifi on ICE
-    , ((modm .|. altMask, xK_i    ), spawn "brave http://wifionice.de/de/")
+    , ((modm .|. altMask, xK_i    ), spawn (myBrowser ++ " http://wifionice.de/de/"))
     ]
     ++
 
