@@ -1,1 +1,8 @@
-bla
+set expandtab
+set ignorecase
+set incsearch
+set encoding=utf-8
+set linebreak
+syntax enable
+set relativenumber
+set noswapfile
