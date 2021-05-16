@@ -9,6 +9,7 @@ This contains a few config files, for the way I like to use my Linux.
 ### Window Management Stuff
 - polybar
 - xmonad
+### TextEditors
+- vim
 ## planned to include
 - emacs
-- vim
