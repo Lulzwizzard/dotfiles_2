@@ -6,10 +6,13 @@ This contains a few config files, for the way I like to use my Linux.
 - bash
 - fish
 - zsh
+### Terminal emulators
+- alacritty
+- termite
+### TextEditors
+- vim
 ### Window Management Stuff
 - polybar
 - xmonad
-### TextEditors
-- vim
 ## planned to include
 - emacs
