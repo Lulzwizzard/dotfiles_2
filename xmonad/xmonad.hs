@@ -28,6 +28,7 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import Data.Maybe (maybeToList)
 import XMonad.Layout.MultiColumns
+import XMonad.Layout.Grid
 import XMonad.Config.Desktop
 import XMonad.Actions.CycleWS
 
@@ -36,7 +37,10 @@ myBrowser :: String
 myBrowser = "brave"
 
 myTerminal :: String
-myTerminal = "termite"
+myTerminal = "alacritty"
+
+backupTerminal :: String
+backupTerminal = "urxvt"
 
 myFileManager :: String
 myFileManager = "spacefm"
@@ -102,7 +106,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- ##basic functionality
     [ ((modm, xK_t), spawn $ (myTerminal ++ " -e fish"))
     , ((modm .|. altMask, xK_t), spawn myTerminal)
-    , ((modm .|. shiftMask, xK_t), spawn (myTerminal ++ " -e zsh"))
     , ((modm,               xK_r     ), spawn "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'")
     , ((modm .|. shiftMask, xK_q     ), spawn "arcolinux-logout")
     , ((modm .|. controlMask, xK_q     ), spawn "xmonad --recompile; xmonad --restart")
@@ -154,6 +157,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     
     -- launch thunderbird
     , ((modm,                 xK_u     ), spawn "thunderbird")
+    , ((modm,                 xK_c     ), spawn "thunderbird -compose")
     
     -- launch files within gui
     , ((modm,                 xK_f     ), spawn myFileManager)
@@ -187,6 +191,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     
     -- launch taskmanager
     , ((modm .|. controlMask, xK_t     ), spawn "xfce4-taskmanager")
+    , ((modm .|. shiftMask,   xK_t     ), spawn (myTerminal ++ " -e htop"))
 
     -- launch WhatsApp
     , ((modm                , xK_w     ), spawn (myBrowser ++ " --profile-directory=Default --app-id=hnpfjngllnobngcgfapefoaidbinmjnm"))
@@ -219,7 +224,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. controlMask, xK_m     ), spawn "pavucontrol")
     
     -- launch wifimanager
-    , ((modm .|. controlMask, xK_w     ), spawn (myTerminal ++ "-e network-manager.nmtui-connect"))
+    , ((modm .|. controlMask, xK_w     ), spawn (backupTerminal ++ " -e network-manager.nmtui-connect"))
     
     -- launch blueberry
     , ((modm .|. controlMask, xK_b     ), spawn "blueberry")
@@ -273,7 +278,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 ------------------------------------------------------------------------
 -- Layouts:
 
-myLayout = mc ||| tiled ||| Full
+myLayout = mc ||| tiled ||| Full ||| Grid
   where
      -- default tiling algorithm
      mc = multiCol [1] 1 0.01 (-0.5)
