@@ -1,3 +1,8 @@
+"  __    _
+" |  \  | | Dem Nikos seine config
+" |   \ | | vim
+" | |\ \| | Just some basic vim functionality
+" |_| \___| Communism will win
 set expandtab
 set ignorecase
 set incsearch
