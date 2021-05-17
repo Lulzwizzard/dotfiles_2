@@ -212,7 +212,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm                , xK_z    ), spawn "zoom")
 
     -- launch SimpleScan
-    , ((modm                , xK_d    ), spawn "simple-scan")
+    , ((modm .|. controlMask, xK_d    ), spawn "simple-scan")
 
     -- launch GenkiArcade
     , ((modm .|. controlMask, xK_e    ), spawn (myBrowser ++ " --profile-directory=Default --app-id=apmgkabhjdajndnmdcbiiaadmfmomlki"))
@@ -229,8 +229,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch blueberry
     , ((modm .|. controlMask, xK_b     ), spawn "blueberry")
 
+    -- launch Todoist
+    , ((modm,                 xK_d     ), spawn (myBrowser ++ " --profile-directory=Default --app-id=elldfnmogicegdcphgljaoaklkpcnbnn"))
+
     -- launch ToDo
-    , ((modm .|. controlMask, xK_d     ), spawn (myBrowser ++ " --profile-directory=Default --app-id=jlhoajbaojeilbdnlldgecmilgppanbh"))
+    , ((modm .|. altMask,     xK_d     ), spawn (myBrowser ++ " --profile-directory=Default --app-id=jlhoajbaojeilbdnlldgecmilgppanbh"))
 
     -- launch vlc
     , ((modm,                 xK_v     ), spawn "vlc")
