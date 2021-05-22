@@ -16,3 +16,6 @@ This contains a few config files, for the way I like to use my Linux.
 - xmonad
 ## planned to include
 - emacs
+- .Xressources
+  - xterm
+  - urxvt
