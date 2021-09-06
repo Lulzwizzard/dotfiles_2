@@ -5,9 +5,11 @@
 #|_| \___| Communism will win
 
 ### Startupstuff
-echo 'Hi, ich bin der Nikos' | lolcat
+#echo 'Hi, ich bin der Nikos' | lolcat
 #pfetch | lolcat
 set -g -x fish_greeting ''
+figlet Der Nikos|lolcat
+pokemon-colorscripts -r | awk '{if(NR>1)print}'
 starship init fish | source
 
 ### EXPORT ###
@@ -176,7 +178,7 @@ end
 ### ALIASES ###
 
 # root privileges
-alias doas="doas --"
+#alias doas="doas --"
 
 # navigation
 alias ..='cd ..' 
@@ -192,7 +194,8 @@ alias vi='vim'
 alias sudo="doas"
 alias neofetch="pfetch"
 alias cccpmacs="emacs"
-
+alias zip="zip -r"
+alias clear="~/.config/fish/clear.sh"
 # Changing "ls" to "exa"
 alias lols='exa -al --group-directories-first | lolcat' # my preferred listing
 alias ls='exa -al --color=always --group-directories-first' # with color codes
