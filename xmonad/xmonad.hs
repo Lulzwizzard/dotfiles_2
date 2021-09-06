@@ -36,6 +36,9 @@ import XMonad.Actions.CycleWS
 myBrowser :: String
 myBrowser = "brave"
 
+backupBrowser :: String
+backupBrowser = "librewolf"
+
 myTerminal :: String
 myTerminal = "alacritty"
 
@@ -106,7 +109,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- ##basic functionality
     [ ((modm, xK_t), spawn $ (myTerminal ++ " -e fish"))
     , ((modm .|. altMask, xK_t), spawn myTerminal)
-    , ((modm,               xK_r     ), spawn "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'")
+    , ((modm,               xK_Return     ), spawn "dmenu_run -i -nb '#404040' -nf '#e74b37' -sb '#e74b37' -sf '#404040' -fn 'SourceCodePro:bold:pixelsize=14' -h 30")
+    , ((modm,               xK_r     ), spawn "dmenu_run -i -nb '#404040' -nf '#e74b37' -sb '#e74b37' -sf '#404040' -fn 'SourceCodePro:bold:  pixelsize=14' -h 30")
     , ((modm .|. shiftMask, xK_q     ), spawn "arcolinux-logout")
     , ((modm .|. controlMask, xK_q     ), spawn "xmonad --recompile; xmonad --restart")
     , ((modm, xK_q     ), kill)
@@ -154,7 +158,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- ###LAUNCH Applications
     -- launch browser
     , ((modm,                 xK_g     ), spawn myBrowser)
-    
+    , ((modm .|.shiftMask,    xK_g     ), spawn backupBrowser)
+
     -- launch thunderbird
     , ((modm,                 xK_u     ), spawn "thunderbird")
     , ((modm,                 xK_c     ), spawn "thunderbird -compose")
@@ -180,11 +185,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch notepadqq
     , ((modm .|. altMask, xK_a     ), spawn "notepadqq")
 
-    -- launch CCCPmacs
-    , ((modm                , xK_a     ), spawn "emacs")
+    -- launch vim 
+    , ((modm                , xK_a     ), spawn (myTerminal ++  " -e vim"))
 
-    -- launch vim
-    , ((modm .|. controlMask, xK_a     ), spawn (myTerminal ++ " -e vim"))
+    -- launch emacs
+    , ((modm .|. controlMask, xK_a     ), spawn "emacs")
 
     -- launch telegram
     , ((modm,                 xK_e     ), spawn "telegram-desktop")
@@ -196,11 +201,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch WhatsApp
     , ((modm                , xK_w     ), spawn (myBrowser ++ " --profile-directory=Default --app-id=hnpfjngllnobngcgfapefoaidbinmjnm"))
 
-    -- launch LibreOffice
-    , ((modm                , xK_o     ), spawn "libreoffice")
-
-    -- launch LibreOffice Writer
-    , ((modm                , xK_s     ), spawn "lowriter")
+    -- launch Typora
+    , ((modm                , xK_s     ), spawn "typora")
 
     -- launch Discord
     , ((modm                , xK_i    ), spawn "discord")
@@ -326,20 +328,22 @@ myLogHook = return ()
 -- Startup hook
 
 myStartupHook = do
-  spawnOnce "xlayoutdisplay -d 108"
-  spawnOnce "polybar mainbar-xmonad" 
-  spawn "xsetroot -cursor_name left_ptr"
-  spawn "exec ~/bin/lock.sh"
-  spawnOnce "nitrogen --restore"
-  spawnOnce "picom -f"
-  spawnOnce "dunst"
-  spawnOnce "albert"
-  spawnOnce "nextcloud"
-  spawnOnce "dropbox"
-  spawnOnce "exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-  spawnOnce "copyq"
-  spawnOnce "exec ~/.xmonad/scripts/disable_screenoff.sh"
-  spawnOnce "flameshot"
+  spawnOnce "xlayoutdisplay -d 108 &"
+  spawnOnce "polybar mainbar-xmonad &" 
+  spawn "xsetroot -cursor_name left_ptr &"
+  spawn "exec ~/bin/lock.sh &"
+  spawnOnce "nitrogen --restore &"
+  spawnOnce "picom -f &"
+  spawnOnce "dunst &"
+  spawnOnce "albert &"
+  spawnOnce "nextcloud &"
+  --spawnOnce "dropbox &"
+  spawnOnce "exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &"
+  spawnOnce "copyq &"
+  spawnOnce "exec ~/.xmonad/scripts/disable_screenoff.sh &"
+  spawnOnce "flameshot &"
+  spawnOnce "kdeconnect-cli --refresh &"
+  spawnOnce "synology-drive &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
