@@ -167,9 +167,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch files within gui
     , ((modm,                 xK_f     ), spawn myFileManager)
 
-    -- launch files within cli
-    , ((modm .|. controlMask, xK_f     ), spawn (myTerminal ++ " -e vifm"))
-    
     -- launch spotify
     , ((modm,                 xK_m     ), spawn "spotify")
     
@@ -182,9 +179,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
      -- launch obsidian
     , ((modm                , xK_b     ), spawn "md.obsidian.Obsidian")
     
-    -- launch notepadqq
-    , ((modm .|. altMask, xK_a     ), spawn "notepadqq")
-
     -- launch vim 
     , ((modm                , xK_a     ), spawn (myTerminal ++  " -e vim"))
 
@@ -203,14 +197,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch Typora
     , ((modm                , xK_s     ), spawn "typora")
 
-    -- launch Discord
-    , ((modm                , xK_i    ), spawn "discord")
-    
     -- launch signal
     , ((modm                , xK_n    ), spawn "signal-desktop")
-
-    -- launch zoom
-    , ((modm                , xK_z    ), spawn "zoom")
 
     -- launch SimpleScan
     , ((modm .|. controlMask, xK_d    ), spawn "simple-scan")
