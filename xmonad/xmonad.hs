@@ -195,7 +195,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,                 xK_e     ), spawn "telegram-desktop")
     
     -- launch taskmanager
-    , ((modm .|. controlMask, xK_t     ), spawn "xfce4-taskmanager")
     , ((modm .|. shiftMask,   xK_t     ), spawn (myTerminal ++ " -e htop"))
 
     -- launch WhatsApp
@@ -236,9 +235,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch ToDo
     , ((modm .|. altMask,     xK_d     ), spawn (myBrowser ++ " --profile-directory=Default --app-id=jlhoajbaojeilbdnlldgecmilgppanbh"))
-
-    -- launch vlc
-    , ((modm,                 xK_v     ), spawn "vlc")
 
     -- make a screenshot
     , ((0,                  xK_Print), spawn "flameshot gui")
@@ -336,14 +332,14 @@ myStartupHook = do
   spawnOnce "picom -f &"
   spawnOnce "dunst &"
   spawnOnce "albert &"
-  spawnOnce "nextcloud &"
-  --spawnOnce "dropbox &"
+  spawnOnce "nextcloud --background &"
   spawnOnce "exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &"
   spawnOnce "copyq &"
   spawnOnce "exec ~/.xmonad/scripts/disable_screenoff.sh &"
   spawnOnce "flameshot &"
   spawnOnce "kdeconnect-cli --refresh &"
   spawnOnce "synology-drive &"
+  spawnOnce "play-with-mpv &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
