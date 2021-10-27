@@ -1,3 +1,4 @@
+  
 "  __    _
 " |  \  | | Dem Nikos seine config
 " |   \ | | vim
@@ -9,5 +10,6 @@ set incsearch
 set encoding=utf-8
 set linebreak
 syntax enable
-set relativenumber
+set number relativenumber
+set nu rnu
 set noswapfile
