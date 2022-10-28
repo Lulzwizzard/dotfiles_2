@@ -192,13 +192,12 @@ alias root="cd /"
 # replacing programs with other programs
 alias vi='vim'
 alias sudo="doas"
-# alias neofetch="pfetch"
+alias neofetch="pfetch"
 alias cccpmacs="emacs"
 alias zip="zip -r"
 alias clear="~/.config/fish/clear.sh"
 alias cl="~/.config/fish/clear.sh"
 alias d200="xlayoutdisplay -d 200"
-alias d108="xlayoutdisplay -d 108"
 
 # Changing "ls" to "exa"
 alias lols='exa -al --group-directories-first | lolcat' # my preferred listing
@@ -281,3 +280,8 @@ alias xres="xmonad --restart"
 #Internet
 alias wifiman="network-manager.nmtui-connect"
 alias ping="ping -c 4"
+
+# replace cat less and more with bat
+alias cat="bat -l"
+alias less="bat -l"
+alias more="bat -l"
