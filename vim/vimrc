@@ -1,9 +1,10 @@
-  
 "  __    _
 " |  \  | | Dem Nikos seine config
 " |   \ | | vim
 " | |\ \| | Just some basic vim functionality
 " |_| \___| Communism will win
+" 
+" basic settings
 set expandtab
 set ignorecase
 set incsearch
@@ -13,3 +14,19 @@ syntax enable
 set number relativenumber
 set nu rnu
 set noswapfile
+
+" Set theme
+colorscheme dracula
+
+" PlugIns
+call plug#begin()
+Plug 'tyru/open-browser.vim' " opens url in browser
+Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+call plug#end()
+
+" keymapping
+nnoremap <C-s> :Files /home/lulzwizzard<CR>
