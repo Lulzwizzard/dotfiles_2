@@ -37,7 +37,7 @@ myBrowser :: String
 myBrowser = "brave"
 
 backupBrowser :: String
-backupBrowser = "librewolf"
+backupBrowser = "firefox"
 
 myTerminal :: String
 myTerminal = "alacritty"
@@ -111,8 +111,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. altMask, xK_t), spawn myTerminal)
     , ((modm,               xK_Return     ), spawn "dmenu_run -i -nb '#404040' -nf '#e74b37' -sb '#e74b37' -sf '#404040' -fn 'SourceCodePro:bold:pixelsize=14' -h 30")
     , ((modm,               xK_r     ), spawn "dmenu_run -i -nb '#404040' -nf '#e74b37' -sb '#e74b37' -sf '#404040' -fn 'SourceCodePro:bold:  pixelsize=14' -h 30")
-    , ((modm .|. shiftMask, xK_q     ), spawn "arcolinux-logout")
-    , ((modm .|. controlMask, xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+    , ((modm .|. shiftMask, xK_q     ), spawn "archlinux-logout")
+    , ((modm .|. altMask, xK_l     ), spawn "betterlockscreen -l")
     , ((modm, xK_q     ), kill)
     , ((modm,                 xK_space ), spawn "albert toggle")
     
@@ -125,8 +125,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((0, xF86XK_AudioNext), spawn "playerctl next")
     , ((0, xF86XK_AudioPrev), spawn "playerctl previous")
     -- Brightness keys
-    , ((0,                    xF86XK_MonBrightnessUp), spawn "brightnessctl s +10%")
-    , ((0,                    xF86XK_MonBrightnessDown), spawn "brightnessctl s 10-%")
+--  , ((0,                    xF86XK_MonBrightnessUp), spawn "brightnessctl s +10%")
+--  , ((0,                    xF86XK_MonBrightnessDown), spawn "brightnessctl s 10-%")
+    , ((0,                    xF86XK_MonBrightnessDown), spawn "xbrightness -3200")
+    , ((0,                    xF86XK_MonBrightnessUp), spawn "xbrightness +3200")
 
     -- Navigation
     -- Move focus to the next window
@@ -174,16 +176,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,                 xK_x     ), spawn "keepassxc")
     
      -- launch pamac
-    , ((modm .|. controlMask, xK_u     ), spawn "pamac-manager")
+    , ((modm .|. controlMask, xK_u     ), spawn "pamac-manager --updates")
+    , ((modm .|. altMask,     xK_u     ), spawn "pamac-manager")
 
      -- launch obsidian
-    , ((modm                , xK_b     ), spawn "md.obsidian.Obsidian")
+    , ((modm                , xK_b     ), spawn "obsidian")
     
-    -- launch vim 
-    , ((modm                , xK_a     ), spawn (myTerminal ++  " -e vim"))
-
     -- launch emacs
-    , ((modm .|. controlMask, xK_a     ), spawn "emacs")
+    , ((modm                , xK_a     ), spawn "emacs")
 
     -- launch telegram
     , ((modm,                 xK_e     ), spawn "telegram-desktop")
@@ -194,8 +194,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch WhatsApp
     , ((modm                , xK_w     ), spawn (myBrowser ++ " --profile-directory=Default --app-id=hnpfjngllnobngcgfapefoaidbinmjnm"))
 
-    -- launch Typora
-    , ((modm                , xK_s     ), spawn "typora")
+    -- set display
+    , ((modm                , xK_s     ), spawn "xlayoutdisplay -d 108")
+    , ((modm .|. shiftMask  , xK_s     ), spawn "xlayoutdisplay -d 200")
 
     -- launch signal
     , ((modm                , xK_n    ), spawn "signal-desktop")
@@ -214,12 +215,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     
     -- launch wifimanager
     , ((modm .|. controlMask, xK_w     ), spawn (backupTerminal ++ " -e network-manager.nmtui-connect"))
-    
+    , ((modm .|. shiftMask,   xK_w     ), spawn "nmcli radio wifi on")    
+
+--  , ((modm .|. shiftMask,   xK_w     ), spawn "~/.xmonad/scripts/toggle-wifi.sh")    
     -- launch blueberry
     , ((modm .|. controlMask, xK_b     ), spawn "blueberry")
 
     -- launch Todoist
-    , ((modm,                 xK_d     ), spawn (myBrowser ++ " --profile-directory=Default --app-id=elldfnmogicegdcphgljaoaklkpcnbnn"))
+    , ((modm,                 xK_d     ), spawn "com.todoist.Todoist")
 
     -- launch ToDo
     , ((modm .|. altMask,     xK_d     ), spawn (myBrowser ++ " --profile-directory=Default --app-id=jlhoajbaojeilbdnlldgecmilgppanbh"))
@@ -229,6 +232,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((shiftMask,          xK_Print), spawn "flameshot full -c -p ~/Bilder/Screenshots")
     
     -- ###JOIN Online Meetings
+    , ((modm .|. controlMask, xK_g     ), spawn (myBrowser ++ " https://meet.sdaj.org/GANbg"))
+    , ((modm .|. altMask,     xK_g     ), spawn (myBrowser ++ " https://bbb.lunanueva.de/b/dkp-y7e-xpa"))
 
     -- ###Travel:
     -- Wifi on ICE
@@ -312,6 +317,7 @@ myLogHook = return ()
 -- Startup hook
 
 myStartupHook = do
+  spawn "$HOME/.xmonad/wifi-checker.sh &"
   spawnOnce "xlayoutdisplay -d 108 &"
   spawnOnce "polybar mainbar-xmonad &" 
   spawn "xsetroot -cursor_name left_ptr &"
@@ -326,7 +332,7 @@ myStartupHook = do
   spawnOnce "exec ~/.xmonad/scripts/disable_screenoff.sh &"
   spawnOnce "flameshot &"
   spawnOnce "kdeconnect-cli --refresh &"
-  spawnOnce "synology-drive &"
+  spawnOnce "com.synology.SynologyDrive"
   spawnOnce "play-with-mpv &"
 
 ------------------------------------------------------------------------
